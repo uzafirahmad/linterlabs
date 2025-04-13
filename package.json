@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "env-cmd -f .env.development next dev --turbopack",
     "build": "next build",
-    "start": "env-cmd -f .env.production next start -p 8080",
+    "start": "env-cmd -f .env.production next start -p $PORT",
     "lint": "next lint"
   },
   "dependencies": {

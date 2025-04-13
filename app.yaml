@@ -1,26 +1,11 @@
-runtime: nodejs22  # or another supported version
-service: linterlabs 
+runtime: nodejs22
+service: linterlabs
 
-# runtime_config:
-#   operating_system: "ubuntu22"
-#   runtime_version: "20"
+env_variables:
+  NODE_ENV: production
 
-# handlers:
-# # Serve all static files with url ending with a file extension
-#   - url: /(.*\..+)$
-#     static_files: build/\1
-#     upload: build/(.*\..+)$
-#     secure: always
-#     redirect_http_response_code: 301
-
-#   # Catch all handler to index.html
-#   - url: /.*
-#     static_files: build/index.html
-#     upload: build/index.html
-#     secure: always
-#     redirect_http_response_code: 301
-
+# Ensure all requests are routed to the Node.js server
 handlers:
-  - url: /.*
-    secure: always
-    script: auto
+- url: /.*
+  secure: always
+  script: auto

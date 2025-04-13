@@ -170,10 +170,10 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build Docker image
-        run: docker build -t gcr.io/${{ secrets.PROJECT_ID }}/admin-panel:${{ github.sha }} .
+        run: docker build -t gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }} .
 
       - name: Push Docker image to GCR
-        run: docker push gcr.io/${{ secrets.PROJECT_ID }}/admin-panel:${{ github.sha }}
+        run: docker push gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }}
 
       - name: Deploy to App Engine Flexible
-        run: gcloud app deploy app.yaml --project=${{ secrets.PROJECT_ID }} --image-url=gcr.io/${{ secrets.PROJECT_ID }}/admin-panel:${{ github.sha }} --quiet
+        run: gcloud app deploy app.yaml --project=${{ secrets.PROJECT_ID }} --image-url=gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }} --quiet

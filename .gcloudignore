@@ -1,13 +1,3 @@
-<!-- # Ignore everything
-* -->
-
-# Allow only required files
-!app.yaml
-!package.json
-!next.config.js
-!public/**
-!.next/**
-
 # Exclude this stuff explicitly
 node_modules/
 .git/

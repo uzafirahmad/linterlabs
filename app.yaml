@@ -19,3 +19,6 @@ service: linterlabs
 handlers:
   - url: /.*
     script: auto
+
+  
+entrypoint: npm start

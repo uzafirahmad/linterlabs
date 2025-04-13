@@ -1,0 +1,5 @@
+dispatch:
+  - url: "linterlabs.com/*"
+    service: linterlabs
+  - url: "www.linterlabs.com/*"
+    service: linterlabs

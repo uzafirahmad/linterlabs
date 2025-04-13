@@ -1,6 +1,10 @@
-runtime: nodejs22  # or another supported version
+runtime: nodejs  # or another supported version
 env: flex
 service: linterlabs 
+
+runtime_config:
+  operating_system: "ubuntu22"
+  runtime_version: "20"
 
 # handlers:
 # # Serve all static files with url ending with a file extension

@@ -31,7 +31,7 @@ COPY --from=builder /app/public /app/public
 COPY --from=builder /app/.env.production /app/
 
 
-EXPOSE 3000
+EXPOSE 8080
 
 
 CMD ["npm", "run", "start"]

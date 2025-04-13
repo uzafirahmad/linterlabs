@@ -34,6 +34,38 @@
 #         credentials: ${{ secrets.SERVICE_ACCOUNT }}
 
 
+# name: Deploy to GAE
+# on:
+#   push:
+#     branches: [master]
+#   workflow_dispatch:
+
+# jobs:
+#   deploy:
+#     name: Deploying to Google Cloud
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+
+#     - name: Setup Node
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: 18
+
+#     - name: Install Dependencies
+#       run: npm install --force
+
+#     - name: Build App
+#       run: npm run build
+
+#     - name: Deploy to App Engine
+#       uses: google-github-actions/deploy-appengine@v0.2.0
+#       with:
+#         deliverables: app.yaml
+#         project_id: ${{ secrets.PROJECT_ID }}
+#         credentials: ${{ secrets.SERVICE_ACCOUNT }}
+
 name: Deploy to GAE
 on:
   push:
@@ -48,20 +80,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup Node
-      uses: actions/setup-node@v2
+    - name: Google Auth
+      uses: google-github-actions/auth@v0.4.0
       with:
-        node-version: 18
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT }}
 
-    - name: Install Dependencies
-      run: npm install --force
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        project_id: ${{ secrets.PROJECT_ID }}
 
-    - name: Build App
-      run: npm run build
+    - name: Configure Docker
+      run: gcloud auth configure-docker
+
+    - name: Build Docker image
+      run: docker build -t gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }} .
+
+    - name: Push Docker image
+      run: docker push gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }}
 
     - name: Deploy to App Engine
-      uses: google-github-actions/deploy-appengine@v0.2.0
-      with:
-        deliverables: app.yaml
-        project_id: ${{ secrets.PROJECT_ID }}
-        credentials: ${{ secrets.SERVICE_ACCOUNT }}
+      run: gcloud app deploy app.yaml --image-url=gcr.io/${{ secrets.PROJECT_ID }}/linterlabs:${{ github.sha }}

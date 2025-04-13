@@ -1,4 +1,4 @@
-runtime: nodejs  # or another supported version
+runtime: nodejs22  # or another supported version
 service: linterlabs 
 
 # runtime_config:

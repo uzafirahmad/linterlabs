@@ -1,5 +1,8 @@
-dispatch:
-  - url: "cyx.com/*"
-    service: linterlabs
-  - url: "www.cyx.com/*"
-    service: linterlabs
+# dispatch:
+#   - url: "cyx.com/*"
+#     service: linterlabs
+#   - url: "www.cyx.com/*"
+#     service: linterlabs
+
+dispatch: []
+

@@ -1,1 +1,21 @@
-/app/
+# Ignore everything
+*
+
+# Allow only required files
+!app.yaml
+!package.json
+!next.config.js
+!public/**
+!.next/**
+
+# Optional - only allow part of pages if needed
+!pages/**
+
+# Exclude this stuff explicitly
+node_modules/
+.git/
+.next/cache/
+tests/
+*.log
+*.md
+.env
